@@ -1,1 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AnatomyConnect — Connections for Anatomy & Physiology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- SPLASH / SYSTEM SELECT SCREEN -->
+  <div id="splash-screen" class="screen active">
+    <div class="splash-bg"></div>
+    <div class="splash-content">
+      <div class="logo-wrap">
+        <div class="logo-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M24 8v32M8 24h32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="24" cy="24" r="6" fill="currentColor" opacity="0.2"/>
+          </svg>
+        </div>
+        <h1 class="logo-text">Anatomy<span>Connect</span></h1>
+      </div>
+      <p class="tagline">Group four words that share a hidden anatomical connection</p>
 
+      <div class="system-grid-label">Choose your system</div>
+      <div class="system-grid" id="system-grid">
+        <!-- Populated by JS -->
+      </div>
+
+      <div class="splash-footer">
+        <p>Designed for first-year health &amp; biomedical sciences students</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAME SCREEN -->
+  <div id="game-screen" class="screen">
+    <header class="game-header">
+      <button id="back-btn" class="icon-btn" aria-label="Back to system select">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+      </button>
+      <div class="game-title-wrap">
+        <h2 id="game-system-title">System</h2>
+        <span id="game-puzzle-num" class="puzzle-badge">Puzzle #1</span>
+      </div>
+      <button id="info-btn" class="icon-btn" aria-label="How to play">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4M12 8h.01"/>
+        </svg>
+      </button>
+    </header>
+
+    <main class="game-main">
+      <div id="solved-area" class="solved-area"></div>
+
+      <div id="board" class="board" role="grid" aria-label="Word tiles"></div>
+
+      <div class="game-controls">
+        <div class="lives-row">
+          <span class="lives-label">Mistakes remaining:</span>
+          <div id="lives-dots" class="lives-dots"></div>
+        </div>
+        <div class="btn-row">
+          <button id="shuffle-btn" class="ctrl-btn secondary">Shuffle</button>
+          <button id="deselect-btn" class="ctrl-btn secondary">Deselect All</button>
+          <button id="submit-btn" class="ctrl-btn primary" disabled>Submit</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- WIN / LOSE OVERLAY -->
+  <div id="result-overlay" class="overlay hidden">
+    <div class="overlay-card">
+      <div id="result-icon" class="result-icon"></div>
+      <h2 id="result-title"></h2>
+      <p id="result-message"></p>
+      <div id="result-groups" class="result-groups"></div>
+      <div class="overlay-btn-row">
+        <button id="play-again-btn" class="ctrl-btn primary">Play Again</button>
+        <button id="change-system-btn" class="ctrl-btn secondary">Change System</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW TO PLAY OVERLAY -->
+  <div id="howto-overlay" class="overlay hidden">
+    <div class="overlay-card howto-card">
+      <h2>How to Play</h2>
+      <div class="howto-body">
+        <p>Find four groups of four words that share an anatomical connection.</p>
+        <ul>
+          <li>Select four tiles you think belong together, then tap <strong>Submit</strong>.</li>
+          <li>Groups are colour-coded by difficulty — <span class="diff-pill yellow">easy</span> to <span class="diff-pill purple">hardest</span>.</li>
+          <li>Watch out for <strong>red herrings</strong> — words that seem to fit but belong elsewhere.</li>
+          <li>You have <strong>4 mistakes</strong> before the game ends.</li>
+          <li>Use <strong>Shuffle</strong> to rearrange tiles for fresh perspective.</li>
+        </ul>
+        <div class="diff-legend">
+          <div class="diff-row"><span class="diff-dot yellow"></span> Straightforward</div>
+          <div class="diff-row"><span class="diff-dot green"></span> Moderate</div>
+          <div class="diff-row"><span class="diff-dot blue"></span> Challenging</div>
+          <div class="diff-row"><span class="diff-dot purple"></span> Expert</div>
+        </div>
+      </div>
+      <button id="howto-close-btn" class="ctrl-btn primary">Let's Go!</button>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <script src="data.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
