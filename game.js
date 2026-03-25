@@ -130,9 +130,27 @@ function renderBoard() {
     tile.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTile(word); } });
 
     board.appendChild(tile);
+    requestAnimationFrame(fitTileText);
   });
 
   updateSubmitBtn();
+}
+
+
+// ------- Auto Scale ----------
+function fitTileText() {
+  const tiles = document.querySelectorAll('#board .tile');
+  tiles.forEach(tile => {
+    tile.style.fontSize = ''; // reset
+    const maxH = tile.clientHeight - 10;
+    const maxW = tile.clientWidth - 8;
+    let size = 15; // start at 15px
+    tile.style.fontSize = size + 'px';
+    while (size > 8 && (tile.scrollHeight > maxH || tile.scrollWidth > maxW)) {
+      size -= 0.5;
+      tile.style.fontSize = size + 'px';
+    }
+  });
 }
 
 // ---------- Toggle Tile ----------
@@ -354,4 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
       $('howto-overlay').classList.add('hidden');
     }
   });
+
+  window.addEventListener('resize', fitTileText);
+  
 });
