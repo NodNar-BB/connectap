@@ -249,7 +249,7 @@ function showResult(won) {
   $('result-title').textContent = won ? 'Well done!' : 'Better luck next time';
   $('result-message').textContent = won
     ? `You solved today's ${SYSTEMS.find(s => s.id === currentSystem)?.name} puzzle with ${4 - mistakesLeft} mistake${4 - mistakesLeft === 1 ? '' : 's'}!`
-    : 'Here's how the groups were arranged:';
+    : 'Here is how the groups were arranged:';
 
   // Show all groups in result
   const rg = $('result-groups');
